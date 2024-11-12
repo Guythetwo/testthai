@@ -1,0 +1,39 @@
+body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+@keyframes moveLeft {
+    from {
+        transform: translateX(-150%); /* Start off-screen to the right */
+    }
+    to {
+        transform: translateX(700%); /* End at the starting position */
+    }
+}
+
+@keyframes size {
+    0% {width: 30%;}
+    25% {width: 32%;}
+    50% {width: 30%;}
+    75% {width: 31%;}
+    25% {width: 33%;}
+}
+
+img.move-left {
+    position: absolute;
+    top: 50px; /* Adjust as needed */
+    animation: moveLeft 20s linear infinite, size 10s ease-in-out infinite;
+    height: auto;
+    margin: 10px;
+}
+
+.water {
+    position: absolute;
+    top: 300px;
+    width: 150vw;
+    height: 100vw;
+    background-color: aqua;
+    z-index: -1;
+}
