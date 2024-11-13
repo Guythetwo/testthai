@@ -5,12 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <input type="file" id="fileInput" multiple="false">
+    <div class="sky"></div>
+    <div class="darksky"></div>
     <div id="imageContainer"></div>
-    <button onclick="clean()">Clear Images</button>
     <div class="water"></div>
+    <div class="darkwater"></div>
+    <img src="img/Tree-PNG-Image-with-Transparent-Background.png" class="tree">
+    <img src="img/pngegg.png" class="Do">
+    <img src="img/pngegg (2).png" class="Do1">
+    <img src="img/pngegg (2).png" class="Do2">
+    <div class="SET" id="SET">
+        <label for="fname">ความในใจ</label>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="fname">ชื่อ</label>
+        <input type="text" id="name" name="name"><br>
+        <label for="fileInput" class="custom-file-upload" id="fileLabel">สร้างกระทง</label>
+        <input type="file" id="fileInput" multiple="false">
+        <button onclick="clean()" class="clean">Clear</button>
+    </div>
+
+    <button class="mainset" id="mainset" onclick="mainset()">สร้างกระทง</button>
 </body>
 <script src="js.js" ></script>
 </html>

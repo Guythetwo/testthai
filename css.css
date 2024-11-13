@@ -1,39 +1,231 @@
 body {
     padding: 0;
     margin: 0;
-    overflow-x: hidden;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow: hidden;
+    font-family: "Prompt", sans-serif;
+    font-style: normal;
 }
 
 @keyframes moveLeft {
     from {
-        transform: translateX(-150%); /* Start off-screen to the right */
+        transform: translateX(-150%);
     }
     to {
-        transform: translateX(700%); /* End at the starting position */
+        transform: translateX(700%);
     }
 }
 
-@keyframes size {
-    0% {width: 30%;}
-    25% {width: 32%;}
-    50% {width: 30%;}
-    75% {width: 31%;}
-    25% {width: 33%;}
+/* เคลื่อนที่ทั้ง container (รวม img และ h1) */
+.move-container {
+    position: absolute;
+    top: 50px;
+    width: 200px;
+    height: 200px;
+    animation: moveLeft 30s linear infinite;
 }
 
-img.move-left {
-    position: absolute;
-    top: 50px; /* Adjust as needed */
-    animation: moveLeft 20s linear infinite, size 10s ease-in-out infinite;
-    height: auto;
+img {
+    width: 200px;
+    height: 200px;
     margin: 10px;
+    filter: brightness(50%);
+    transition-duration: 500ms;
+}
+
+/* ซ่อน h1 โดยเริ่มต้น และแสดงเมื่อ hover ที่ img */
+h1 {
+    display: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    width: 40vw;  /* กำหนดความกว้างให้เหมาะสม */
+    height: auto;
+    position: absolute;
+    font-size: 15px;
+    top: -20px;
+    left: 5vw;
+    text-overflow: ellipsis;  /* แสดง ... เมื่อข้อความยาวเกินขอบเขต */
+    white-space: normal;  /* ให้ข้อความสามารถแบ่งบรรทัดได้ */
+    word-wrap: break-word;  /* ถ้าข้อความยาวเกินจะตัดคำและย้ายไปบรรทัดถัดไป */
+    border-radius: 5px;
+    overflow: hidden;  /* ซ่อนข้อความที่เกินขอบเขต */
+}
+
+/* แสดงข้อความ h1 เมื่อ hover บน img */
+.move-container:hover h1 {
+    display: block;
+}
+
+.move-container:hover img {
+    filter: brightness(90%)
+}
+
+/* หยุดการเคลื่อนไหวของ move-container เมื่อ hover บนมัน */
+.move-container:hover {
+    animation-play-state: paused;
 }
 
 .water {
     position: absolute;
     top: 300px;
     width: 150vw;
-    height: 100vw;
-    background-color: aqua;
+    height: 150vw;
+    background-image: url("./img/photo-1445112098124-3e76dd67983c.jpg");
     z-index: -1;
+}
+
+.darkwater {
+    position: absolute;
+    top: 300px;
+    width: 150vw;
+    height: 150vw;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.253), rgba(0, 0, 0, 0.904));
+    transform: rotate(180deg);
+    z-index: 1;
+}
+
+.sky {
+    position: absolute;
+    top: -10px;
+    left: -140px;
+    width: 190vw;
+    height: 150vw;
+    background-image: url("./img/depositphotos_21263377-stock-photo-full-moon.jpg");
+    z-index: -5;
+    filter: brightness(85%);
+}
+
+.darksky {
+    position: absolute;
+    top: 0px;
+    left: -140px;
+    width: 150vw;
+    height: 150vw;
+    background-image: linear-gradient(to top, rgba(255,0,0,0), rgba(0, 0, 0, 0.356));
+    z-index: -3;
+}
+
+.tree {
+    position: absolute;
+    filter: brightness(0%);
+    top: 135px;
+    left: -40px;
+    width: 50%;
+    height: auto;
+    z-index: -3;
+    transition-duration: unset;
+}
+
+.Do {
+    position: absolute;
+    filter: brightness(0%);
+    top: 110px;
+    left: 250px;
+    z-index: -3;
+    transition-duration: unset;
+}
+
+.Do1 {
+    position: absolute;
+    filter: brightness(0%);
+    top: 200px;
+    left: 170px;
+    z-index: -3;
+    transform: scaleX(-1);
+    transition-duration: unset;
+}
+
+.Do2 {
+    position: absolute;
+    filter: brightness(0%);
+    top: 190px;
+    left: 110px;
+    z-index: -3;
+    transform: scaleX(-1);
+    transition-duration: unset;
+}
+
+.SET {
+    display: none;
+    position: relative;
+    width: 300px;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.37);
+    border: 5px solid black;
+    margin: auto;
+    top: 30vw;
+    text-align: center;
+    font-size: 35px;
+    z-index: 1000;
+    border-radius: 10px;
+}
+
+input[type=text] {
+    position: relative;
+    top: 60px;
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #a1a1a1;
+    border-radius: 3%;
+}
+
+label {
+    position: relative;
+    top: 65px;
+}
+
+#fileInput {
+    display: none;
+  }
+
+.custom-file-upload {
+  position: relative;
+  top: 110px;
+  left: 30px;
+  display: inline-block;
+  padding: 1px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 5px solid #3c8a3f;
+}
+
+.custom-file-upload:hover {
+  background-color: #45a049;
+}
+
+.clean {
+    position: relative;
+    bottom: -210px;
+    left: 10px;
+    background-color: #ff0000;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #530101;
+}
+
+.mainset {
+    position: relative;
+    top: 140vw;
+    margin: auto;
+    z-index: 1000;
+    width: 200px;
+    height: 50px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    border: 5px solid #3c8a3f;
+    font-family: "Prompt", sans-serif;
+    font-style: normal;
+    font-size: 20px;
+}
+
+.mainset:hover {
+    background-color: #45a049;
 }

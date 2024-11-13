@@ -1,38 +1,62 @@
-document.getElementById('fileInput').addEventListener('change', function(event) {
-    const files = event.target.files; // เลือกไฟล์ทั้งหมดที่ผู้ใช้เลือก
-    if (files.length > 0) {
+var cout = 0;
 
+document.getElementById("fileInput").addEventListener("change", function() {
+    var fileName = this.files.length > 0 ? this.files[0].name : "No file chosen";
+    document.getElementById("fileLabel").textContent = fileName;
+  });
+
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    const files = event.target.files;
+    const Text = document.getElementById("fname").value;
+    const nameText = document.getElementById("name").value;
+    const set = document.getElementById("SET")
+    const mainset = document.getElementById("mainset")
+    const fileLabel = document.getElementById("fileLabel")
+    if (files.length > 0) {
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
 
-            // Check if the file is an image
             if (file.type.startsWith('image/')) {
-                const reader = new FileReader(); // ใช้อ่านไฟล์
+                const reader = new FileReader();
 
                 reader.onload = function(e) {
-                    ranmath = Math.floor(Math.random() * (200 - 10)) + 10;
-                    const img = document.createElement('img');
-                    img.src = e.target.result; // กำหนดค่า src ของ <img> จากไฟล์ที่เลือก
-                    img.alt = "รูปที่อัปโหลด";
-                    img.classList.add('move-left');
-                    img.style.width = "30%"; // กำหนดขนาดรูปภาพ
-                    img.style.height = "auto"; // ความสูงอัตโนมัติ
-                    img.style.margin = "10px"; // เพิ่มช่องว่างระหว่างภาพ
-                    img.style.position = "absolute";
-                    console.log(ranmath + 200 + "px")
-                    img.style.top = (ranmath + 200) + "px"
+                    if (document.getElementById('fname').value != '' && document.getElementById('name').value != '') {
+                        console.log("LOAD BOAT")
+                        potop = Math.floor(Math.random() * (200 - 10)) + 10 + 240;
+                        const container = document.createElement('div');
+                        container.classList.add('move-container');
+                        container.style.top = potop + "px";
+                        container.id = "img" + cout;
+                        container.style.zIndex = potop;
+                        
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.alt = "รูปที่อัปโหลด";
+                        
+                        const h1 = document.createElement('h1');
+                        h1.innerHTML = Text + "<br>" + "BY : " + nameText;
+                        
+                        container.appendChild(img);
+                        container.appendChild(h1);
+                        document.getElementById('imageContainer').appendChild(container);
+                        cout += 1;
+                        set.style.display = "none";
+                        mainset.style.display = "block";
+                        } else {
+                            console.log("ERROR BOAT!")
+                        }
 
-                    // แสดงรูปภาพใน container
-                    document.getElementById('imageContainer').appendChild(img);
-                }
+                        document.getElementById('fileInput').value = '';
+                        document.getElementById('fname').value = '';
+                        document.getElementById('name').value = '';
+                        fileLabel.innerHTML = 'สร้างกระทง';
+                };
 
                 reader.onerror = function() {
                     console.error('Error reading the file');
                 };
 
-                document.getElementById('fileInput').value = '';
-
-                reader.readAsDataURL(file); // อ่านไฟล์เป็น Data URL
+                reader.readAsDataURL(file);
             } else {
                 alert('กรุณาเลือกไฟล์ภาพเท่านั้น');
             }
@@ -41,6 +65,19 @@ document.getElementById('fileInput').addEventListener('change', function(event) 
 });
 
 function clean() {
+    const set = document.getElementById("SET");
+    const mainset = document.getElementById("mainset");
+    set.style.display = "none";
+    mainset.style.display = "block";
     document.getElementById('imageContainer').innerHTML = '';
     document.getElementById('fileInput').value = '';
+    document.getElementById('fname').value = '';
+    document.getElementById('name').value = '';
+}
+
+function mainset() {
+    const set = document.getElementById("SET");
+    const mainset = document.getElementById("mainset");
+    set.style.display = "block";
+    mainset.style.display = "none";
 }
